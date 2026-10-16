@@ -1,3 +1,4 @@
+from contextlib import asynccontextmanager
 from typing import Optional
 from fastapi import Depends, FastAPI, HTTPException, Query, status
 from fastapi.middleware.cors import CORSMiddleware
@@ -10,10 +11,16 @@ from .db import Base, engine, get_db
 from .models import CloudAsset
 from .schemas import AssetCreate, AssetOut, AssetUpdate, StatsOut
 
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    Base.metadata.create_all(bind=engine)
+    yield
+
 app = FastAPI(
     title=settings.app_name,
     description="CloudPulse Infrastructure & Asset Management DevOps Backend",
-    version="1.0.0"
+    version="1.0.0",
+    lifespan=lifespan
 )
 
 app.add_middleware(
@@ -26,10 +33,6 @@ app.add_middleware(
 
 # Instrument Prometheus metrics endpoint at /metrics
 Instrumentator().instrument(app).expose(app, endpoint="/metrics")
-
-@app.on_event("startup")
-def startup_db():
-    Base.metadata.create_all(bind=engine)
 
 @app.get("/", tags=["System"])
 def root():
