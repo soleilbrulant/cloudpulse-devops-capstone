@@ -8,8 +8,8 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  BACKEND_IMAGE: ghcr.io/${{ github.repository }}/cloudpulse-backend
-  FRONTEND_IMAGE: ghcr.io/${{ github.repository }}/cloudpulse-frontend
+  BACKEND_IMAGE: ghcr.io/${{ github.repository_owner }}/cloudpulse-backend
+  FRONTEND_IMAGE: ghcr.io/${{ github.repository_owner }}/cloudpulse-frontend
 
 jobs:
   test:
@@ -84,6 +84,9 @@ jobs:
     needs: security-scan
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Checkout Source Code
         uses: actions/checkout@v4
