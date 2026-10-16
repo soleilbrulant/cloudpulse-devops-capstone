@@ -14,9 +14,6 @@ spec:
       labels:
         app: {{ include "cloudpulse.fullname" . }}-frontend
     spec:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 101
       containers:
         - name: frontend
           image: "{{ .Values.image.frontend.repository }}:{{ .Values.image.frontend.tag }}"

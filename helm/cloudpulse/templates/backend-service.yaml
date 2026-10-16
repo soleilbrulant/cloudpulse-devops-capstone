@@ -12,3 +12,18 @@ spec:
       targetPort: {{ .Values.service.backendPort }}
   selector:
     app: {{ include "cloudpulse.fullname" . }}-backend
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  labels:
+    app: {{ include "cloudpulse.fullname" . }}-backend
+spec:
+  type: ClusterIP
+  ports:
+    - name: http
+      port: {{ .Values.service.backendPort }}
+      targetPort: {{ .Values.service.backendPort }}
+  selector:
+    app: {{ include "cloudpulse.fullname" . }}-backend
