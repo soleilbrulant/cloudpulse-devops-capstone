@@ -31,7 +31,7 @@ graph TD
     Dev["Platform Engineer"] -->|"Push Code / PR"| GitHub["GitHub Repository"]
     GitHub -->|"Trigger CI"| GHA["GitHub Actions Runner"]
     
-    subgraph CI_Pipeline ["Continuous Integration & DevSecOps"]
+    subgraph CI_Pipeline ["Continuous Integration and DevSecOps"]
         GHA -->|"1. Unit Tests"| Pytest["Pytest Test Suite - 12 Tests"]
         GHA -->|"2. Compile Frontend"| Vite["Vite React Production Build"]
         GHA -->|"3. Containerize"| Docker["Docker Multi-Stage Build"]
@@ -53,11 +53,11 @@ graph TD
         ArgoCD["ArgoCD GitOps"] -->|"Continuous Reconciliation"| Pods
         Ingress["NGINX Ingress Controller"] -->|"Route /api"| Backend["FastAPI Backend Pods - 2 to 6 Replicas"]
         Ingress -->|"Route /"| Frontend["React Frontend Pods - 2 Replicas"]
-        Backend -->|"SQLAlchemy ORM"| Postgres[("PostgreSQL 16 StatefulSet")]
+        Backend -->|"SQLAlchemy ORM"| Postgres["PostgreSQL 16 StatefulSet"]
         HPA["Horizontal Pod Autoscaler"] -->|"Target 70% CPU"| Backend
     end
 
-    subgraph Observability_Telemetry ["Monitoring & Alerting"]
+    subgraph Observability_Telemetry ["Monitoring and Alerting"]
         Backend -->|"Expose"| Metrics["/metrics Endpoint"]
         Prometheus["Prometheus Operator"] -->|"Scrape every 15s"| Metrics
         Prometheus -->|"Stream Metrics"| Grafana["Grafana Dashboards"]
