@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudpulse-broken-image
+  namespace: cloudpulse
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: broken-image
+  template:
+    metadata:
+      labels:
+        app: broken-image
+    spec:
+      containers:
+        - name: backend
+          image: ghcr.io/soleilbrulant/cloudpulse-backend:non-existent-tag-v999

@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloudpulse-fixed-image
+  namespace: cloudpulse
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fixed-backend
+  template:
+    metadata:
+      labels:
+        app: fixed-backend
+    spec:
+      containers:
+        - name: backend
+          image: ghcr.io/soleilbrulant/cloudpulse-backend:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
