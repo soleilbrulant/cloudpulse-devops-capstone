@@ -19,9 +19,6 @@ COPY nginx.conf /etc/nginx/conf.d/cloudpulse.conf
 # Copy compiled static assets from builder
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-# Run as non-root user
-USER nginx
-
 EXPOSE 80
 
 CMD ["nginx", "-g", "daemon off;"]
