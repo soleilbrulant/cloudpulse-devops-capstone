@@ -27,40 +27,40 @@ The project demonstrates an end-to-end cloud engineering journey:
 ## 2. Architecture diagram
 
 ```mermaid
-graph TD;
-    Dev[Platform Engineer]-->|Push Code / Pull Request|GitHub[GitHub Repository];
-    GitHub-->|Trigger CI|GHA[GitHub Actions Runner];
+graph TD
+    Dev["Platform Engineer"] -->|"Push Code / PR"| GitHub["GitHub Repository"]
+    GitHub -->|"Trigger CI"| GHA["GitHub Actions Runner"]
     
-    subgraph CI_Pipeline [Continuous Integration & DevSecOps]
-        GHA-->|1. Unit Tests|Pytest[Pytest Test Suite (12 Tests)];
-        GHA-->|2. Compile Frontend|Vite[Vite React Production Build];
-        GHA-->|3. Containerize|Docker[Docker Multi-Stage Build];
-        GHA-->|4. Vulnerability Scan|Trivy[Trivy Container Security Gate];
-        Trivy-->|Pass: Push Image|GHCR[GitHub Container Registry (GHCR)];
-        GHA-->|5. Validate Chart|HelmLint[Helm Lint Validation];
+    subgraph CI_Pipeline ["Continuous Integration & DevSecOps"]
+        GHA -->|"1. Unit Tests"| Pytest["Pytest Test Suite - 12 Tests"]
+        GHA -->|"2. Compile Frontend"| Vite["Vite React Production Build"]
+        GHA -->|"3. Containerize"| Docker["Docker Multi-Stage Build"]
+        GHA -->|"4. Vulnerability Scan"| Trivy["Trivy Container Security Gate"]
+        Trivy -->|"Pass: Push Image"| GHCR["GitHub Container Registry - GHCR"]
+        GHA -->|"5. Validate Chart"| HelmLint["Helm Lint Validation"]
     end
 
-    subgraph AWS_Cloud [AWS Cloud Infrastructure - Terraform]
-        TF[Terraform]-->|Provision|VPC[Custom AWS VPC (10.0.0.0/16)];
-        VPC-->|Subnets|AZ1[Public Subnet ap-south-1a];
-        VPC-->|Subnets|AZ2[Public Subnet ap-south-1b];
-        TF-->|Deploy|EKS[Amazon EKS Managed Cluster];
-        EKS-->|Manage|Nodes[Managed Worker Node Group (t3.medium)];
+    subgraph AWS_Cloud ["AWS Cloud Infrastructure - Terraform"]
+        TF["Terraform"] -->|"Provision"| VPC["Custom AWS VPC - 10.0.0.0/16"]
+        VPC -->|"Subnets"| AZ1["Public Subnet ap-south-1a"]
+        VPC -->|"Subnets"| AZ2["Public Subnet ap-south-1b"]
+        TF -->|"Deploy"| EKS["Amazon EKS Managed Cluster"]
+        EKS -->|"Manage"| Nodes["Managed Worker Node Group - t3.medium"]
     end
 
-    subgraph Kubernetes_Cluster [Kubernetes Cluster Architecture]
-        GHCR-.->|Pull Images (Git SHA)|Pods[CloudPulse Deployments];
-        ArgoCD[ArgoCD GitOps]-->|Continuous Reconciliation|Pods;
-        Ingress[NGINX Ingress Controller]-->|Route /api|Backend[FastAPI Backend Pods (2-6 Replicas)];
-        Ingress-->|Route /|Frontend[React Frontend Pods (2 Replicas)];
-        Backend-->|SQLAlchemy ORM|Postgres[(PostgreSQL 16 StatefulSet)];
-        HPA[Horizontal Pod Autoscaler]-->|Target 70% CPU|Backend;
+    subgraph Kubernetes_Cluster ["Kubernetes Cluster Architecture"]
+        GHCR -.->|"Pull Images"| Pods["CloudPulse Deployments"]
+        ArgoCD["ArgoCD GitOps"] -->|"Continuous Reconciliation"| Pods
+        Ingress["NGINX Ingress Controller"] -->|"Route /api"| Backend["FastAPI Backend Pods - 2 to 6 Replicas"]
+        Ingress -->|"Route /"| Frontend["React Frontend Pods - 2 Replicas"]
+        Backend -->|"SQLAlchemy ORM"| Postgres[("PostgreSQL 16 StatefulSet")]
+        HPA["Horizontal Pod Autoscaler"] -->|"Target 70% CPU"| Backend
     end
 
-    subgraph Observability_Telemetry [Monitoring & Alerting]
-        Backend-->|Expose|Metrics[/metrics Endpoint];
-        Prometheus[Prometheus Operator]-->|Scrape (15s)|Metrics;
-        Prometheus-->|Stream Metrics|Grafana[Grafana Dashboards];
+    subgraph Observability_Telemetry ["Monitoring & Alerting"]
+        Backend -->|"Expose"| Metrics["/metrics Endpoint"]
+        Prometheus["Prometheus Operator"] -->|"Scrape every 15s"| Metrics
+        Prometheus -->|"Stream Metrics"| Grafana["Grafana Dashboards"]
     end
 ```
 
