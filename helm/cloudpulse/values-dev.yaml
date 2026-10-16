@@ -1,0 +1,10 @@
+replicaCount: 1
+autoscaling:
+  enabled: false
+ingress:
+  host: "dev.cloudpulse.local"
+resources:
+  backend:
+    requests:
+      cpu: 50m
+      memory: 64Mi

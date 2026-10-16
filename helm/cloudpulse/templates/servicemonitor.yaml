@@ -1,0 +1,14 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: {{ include "cloudpulse.fullname" . }}-backend-monitor
+  labels:
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app: {{ include "cloudpulse.fullname" . }}-backend
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s

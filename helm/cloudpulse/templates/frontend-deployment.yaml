@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "cloudpulse.fullname" . }}-frontend
+  labels:
+    app: {{ include "cloudpulse.fullname" . }}-frontend
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ include "cloudpulse.fullname" . }}-frontend
+  template:
+    metadata:
+      labels:
+        app: {{ include "cloudpulse.fullname" . }}-frontend
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 101
+      containers:
+        - name: frontend
+          image: "{{ .Values.image.frontend.repository }}:{{ .Values.image.frontend.tag }}"
+          imagePullPolicy: {{ .Values.image.frontend.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.service.frontendPort }}
+          resources:
+            {{- toYaml .Values.resources.frontend | nindent 12 }}
+          livenessProbe:
+            httpGet:
+              path: /
+              port: {{ .Values.service.frontendPort }}
+            initialDelaySeconds: 5
+            periodSeconds: 10

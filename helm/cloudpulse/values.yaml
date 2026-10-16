@@ -1,0 +1,47 @@
+replicaCount: 2
+
+image:
+  backend:
+    repository: ghcr.io/soleilbrulant/cloudpulse-backend
+    pullPolicy: IfNotPresent
+    tag: "latest"
+  frontend:
+    repository: ghcr.io/soleilbrulant/cloudpulse-frontend
+    pullPolicy: IfNotPresent
+    tag: "latest"
+
+service:
+  backendPort: 8000
+  frontendPort: 80
+
+ingress:
+  enabled: true
+  className: "nginx"
+  host: "cloudpulse.local"
+
+resources:
+  backend:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+  frontend:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 6
+  targetCPUUtilizationPercentage: 70
+
+postgresql:
+  enabled: true
+  persistence:
+    size: 5Gi
