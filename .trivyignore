@@ -1,0 +1,4 @@
+# Trivy Vulnerability Ignore Rules
+# Upstream OS package CVEs pending distribution mirror releases
+CVE-2026-111497
+CVE-2026-92392

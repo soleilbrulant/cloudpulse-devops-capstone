@@ -10,6 +10,9 @@ RUN npm run build
 # Stage 2: Serve using hardened Nginx Alpine
 FROM nginx:alpine
 
+# Apply security patches for alpine base packages to resolve CVEs
+RUN apk update && apk upgrade --no-cache && rm -rf /var/cache/apk/*
+
 # Remove default configuration
 RUN rm -rf /etc/nginx/conf.d/default.conf
 

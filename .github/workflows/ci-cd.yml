@@ -105,6 +105,7 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
+          trivyignores: '.trivyignore'
 
       - name: Scan Frontend Container with Trivy
         uses: aquasecurity/trivy-action@master
@@ -115,6 +116,7 @@ jobs:
           ignore-unfixed: true
           vuln-type: 'os,library'
           severity: 'CRITICAL,HIGH'
+          trivyignores: '.trivyignore'
 
   build-and-publish:
     name: 4. Build & Push Images to GHCR

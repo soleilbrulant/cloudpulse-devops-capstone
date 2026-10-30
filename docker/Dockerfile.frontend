@@ -10,7 +10,10 @@ COPY . .
 RUN npm run build
 
 # Stage 2: Nginx Non-Root Production Server
-FROM nginx:1.25-alpine AS runtime
+FROM nginx:alpine AS runtime
+
+# Apply security patches for alpine base packages to resolve CVEs
+RUN apk update && apk upgrade --no-cache && rm -rf /var/cache/apk/*
 
 COPY --from=builder /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
