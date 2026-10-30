@@ -5,6 +5,16 @@
 [![Kubernetes](https://img.shields.io/badge/Kubernetes-v1.28+-326CE5?logo=kubernetes&logoColor=white)](https://kubernetes.io/)
 [![Terraform](https://img.shields.io/badge/Terraform-AWS_EKS-7B42BC?logo=terraform&logoColor=white)](https://www.terraform.io/)
 [![Security: Trivy](https://img.shields.io/badge/Security-Trivy_Pass-brightgreen?logo=aqua)](https://trivy.dev/)
+[![Demo Video](https://img.shields.io/badge/Demo-Video_Walkthrough-red?logo=youtube)](./demo/VIDEO.md)
+[![Presentation](https://img.shields.io/badge/Slides-Capston_Deck-orange?logo=google-slides)](./demo/PRESENTATION.md)
+
+---
+
+> ### 📢 Official Capstone Submission Artifacts
+> - 🎬 **Demo Video Walkthrough:** [**Watch on Google Drive (`demo/VIDEO.md`)**](./demo/VIDEO.md)
+> - 📊 **Project Presentation Deck:** [**View Slides (`demo/PRESENTATION.md`)**](./demo/PRESENTATION.md) | [**Interactive Deck (`demo/presentation.html`)**](./demo/presentation.html)
+> - 📋 **Submission Specification & Checklist:** [**`SUBMISSION.md`**](./SUBMISSION.md)
+> - 📸 **Dashboard Screenshots & Proof:** [**`demo/screenshots/`**](./demo/screenshots/)
 
 ---
 
@@ -275,9 +285,46 @@ Two production failure scenarios were simulated, analyzed, and remediated (see `
 
 ---
 
-## 14. Screenshots & Terminal Proof
+## 14. Screenshots & Visual Proof
 
-### Automated Pytest Suite Execution:
+### 1. End-to-End System Architecture Overview
+![Architecture Overview](demo/screenshots/01-architecture-overview.png)
+
+### 2. Multi-Cloud Inventory & Asset Dashboard (React 18 + Vite)
+![React Frontend Dashboard](demo/screenshots/02-application-dashboard.png)
+
+### 3. Full-Stack Docker Multi-Stage Build & Compose Stack
+![Docker Compose Stack](demo/screenshots/03-docker-compose-stack.png)
+
+### 4. Terraform AWS Infrastructure (VPC & Amazon EKS)
+![Terraform Infrastructure](demo/screenshots/04-terraform-aws-eks.png)
+
+### 5. Kubernetes Workloads (Deployments, Services, Ingress & HPA)
+![Kubernetes Workloads](demo/screenshots/05-kubernetes-workloads.png)
+
+### 6. Helm Chart Packaging & Release Deployment
+![Helm Release Deployment](demo/screenshots/06-helm-chart-deployment.png)
+
+### 7. End-to-End CI/CD Pipeline Execution (GitHub Actions)
+![GitHub Actions Workflow Run](demo/screenshots/07-cicd-pipeline-run.png)
+
+### 8. DevSecOps Security Gates (Aqua Trivy, Bandit & Gitleaks)
+![Trivy & Bandit Security Gate](demo/screenshots/08-devsecops-trivy-bandit.png)
+
+### 9. Production Observability & Golden Signals (Grafana)
+![Grafana Production Dashboard](demo/screenshots/09-monitoring-grafana.png)
+
+### 10. GitOps Continuous Reconciliation & Drift Detection (ArgoCD)
+![ArgoCD Continuous Reconciliation](demo/screenshots/10-gitops-argocd.png)
+
+### 11. Troubleshooting Challenge: Incident RCA & Verified Fixes
+![Troubleshooting Incident RCA](demo/screenshots/11-troubleshooting-playbook.png)
+
+---
+
+### Terminal Logs & Proof of Execution:
+
+#### Automated Pytest Suite Execution:
 ```bash
 $ pytest -v
 tests/test_api.py::test_root PASSED                                      [  8%]
@@ -295,7 +342,7 @@ tests/test_api.py::test_delete_asset PASSED                              [100%]
 ======================== 12 passed in 0.44s ========================
 ```
 
-### Full-Stack Docker Compose Startup:
+#### Full-Stack Docker Compose Startup:
 ```bash
 $ docker compose up -d
 [+] Running 4/4
@@ -305,7 +352,7 @@ $ docker compose up -d
  ✔ Container cloudpulse-frontend                      Started   1.6s 
 ```
 
-### Kubernetes Pods & Services:
+#### Kubernetes Pods, Services & HPA:
 ```bash
 $ kubectl get all -n cloudpulse
 NAME                                      READY   STATUS    RESTARTS   AGE
@@ -326,7 +373,78 @@ horizontalpodautoscaler.autoscaling   Deployment/cloudpulse-backend    cpu: 10% 
 
 ---
 
-## 15. Lessons learned
+## 15. Repository & Deliverables Layout
+
+```
+cloudpulse-devops-capstone/
+├── application/                # Application documentation & architecture reference
+│   └── README.md
+├── backend/                    # Python 3.12 FastAPI microservice & Pytest suite
+│   ├── app/                    # API endpoints, SQLAlchemy models, Pydantic schemas
+│   ├── tests/                  # Pytest test suite (12 unit & integration tests)
+│   └── alembic/                # Database migrations
+├── frontend/                   # React 18 + Vite 5 dashboard
+│   ├── src/                    # Dashboard UI components & styling
+│   └── nginx.conf              # Production Nginx reverse-proxy
+├── docker/                     # Dockerfiles & local orchestration
+│   ├── Dockerfile.backend
+│   ├── Dockerfile.frontend
+│   ├── docker-compose.yml
+│   └── README.md
+├── kubernetes/                 # Pure Kubernetes manifests
+│   ├── 00-namespace.yaml
+│   ├── 01-configmap.yaml
+│   ├── 02-secret.yaml
+│   ├── 03-postgres.yaml        # StatefulSet + 5Gi PVC
+│   ├── 04-backend.yaml         # Deployment with Probes & non-root user
+│   ├── 05-frontend.yaml
+│   ├── 06-ingress.yaml
+│   ├── 07-hpa.yaml
+│   └── kustomization.yaml
+├── helm/                       # Parameterized Helm charts (dev & prod)
+│   └── cloudpulse/
+│       ├── Chart.yaml
+│       ├── values.yaml
+│       ├── values-prod.yaml
+│       └── templates/
+├── terraform/                  # AWS Infrastructure as Code (VPC, Subnets, EKS)
+│   ├── main.tf
+│   ├── variables.tf
+│   └── outputs.tf
+├── .github/
+│   └── workflows/              # GitHub Actions CI/CD & DevSecOps pipeline
+│       └── ci-cd.yml
+├── security/                   # DevSecOps scanning configs & policies
+│   ├── trivy.yaml              # Container & dependency vulnerability scanning
+│   ├── .gitleaks.toml          # Secret detection rules
+│   ├── bandit.yaml             # Python SAST rules
+│   └── SECURITY_GATES.md
+├── monitoring/                 # Observability & Golden Signals
+│   ├── prometheus-values.yaml
+│   ├── servicemonitor.yaml
+│   └── grafana-dashboard.json
+├── gitops/                     # ArgoCD GitOps Continuous Reconciliation
+│   ├── application.yaml
+│   ├── appproject.yaml
+│   └── README.md
+├── troubleshooting/            # Simulated production incidents & RCA playbook
+│   ├── broken-image.yaml
+│   ├── fixed-image.yaml
+│   ├── broken-service.yaml
+│   ├── fixed-service.yaml
+│   └── TROUBLESHOOTING.md
+├── demo/                       # Video demonstration & presentation materials
+│   ├── VIDEO.md                # Video walkthrough link (Google Drive) & timestamps
+│   ├── PRESENTATION.md         # Full 15-slide capstone presentation deck
+│   ├── presentation.html       # Interactive slide presentation
+│   └── screenshots/            # UI, Grafana, ArgoCD & pipeline screenshots
+├── SUBMISSION.md               # Official capstone evaluation document
+└── README.md                   # Complete platform documentation
+```
+
+---
+
+## 16. Lessons learned
 
 1. **Shift-Left Security is Essential:** Running automated Trivy scans and secret scanners inside the CI pipeline prevents compromised dependencies and plain-text credentials from reaching registries.
 2. **Infrastructure as Code Eliminates Snowflake Clusters:** Defining AWS VPCs and EKS clusters with Terraform provides reproducible, auditable cloud environments that prevent manual configuration drift.

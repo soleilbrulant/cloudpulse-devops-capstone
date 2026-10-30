@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: cloudpulse-project
+  namespace: argocd
+spec:
+  description: "CloudPulse Production Platform Project"
+  sourceRepos:
+    - 'https://github.com/soleilbrulant/cloudpulse-devops-capstone.git'
+  destinations:
+    - namespace: cloudpulse
+      server: 'https://kubernetes.default.svc'
+  clusterResourceWhitelist:
+    - group: ''
+      kind: Namespace
+    - group: 'networking.k8s.io'
+      kind: Ingress
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'

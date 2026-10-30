@@ -1,0 +1,16 @@
+# Gitleaks Configuration for CloudPulse DevSecOps
+title = "CloudPulse Secret Detection Rules"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Global allowlist for benign example configurations"
+paths = [
+  '''terraform/terraform\.tfvars\.example''',
+  '''helm/cloudpulse/values\.yaml''',
+  '''helm/cloudpulse/values-dev\.yaml''',
+  '''helm/cloudpulse/values-prod\.yaml''',
+  '''docker-compose\.yml''',
+  '''kubernetes/02-secret\.yaml'''
+]

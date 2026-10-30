@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: cloudpulse-postgres
+  namespace: cloudpulse
+  labels:
+    app: cloudpulse-postgres
+spec:
+  serviceName: "cloudpulse-postgres"
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cloudpulse-postgres
+  template:
+    metadata:
+      labels:
+        app: cloudpulse-postgres
+    spec:
+      containers:
+        - name: postgres
+          image: postgres:16-alpine
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5432
+              name: postgres
+          envFrom:
+            - secretRef:
+                name: cloudpulse-secret
+          resources:
+            limits:
+              cpu: 500m
+              memory: 512Mi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          volumeMounts:
+            - name: pgdata
+              mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+    - metadata:
+        name: pgdata
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 5Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cloudpulse-postgres
+  namespace: cloudpulse
+  labels:
+    app: cloudpulse-postgres
+spec:
+  type: ClusterIP
+  ports:
+    - port: 5432
+      targetPort: 5432
+      name: postgres
+  selector:
+    app: cloudpulse-postgres

@@ -1,0 +1,20 @@
+# Trivy Vulnerability Scanner Configuration
+# Scans filesystem dependencies and container images with strict security gates
+
+format: table
+exit-code: 1
+ignore-unfixed: true
+vuln-type:
+  - os
+  - library
+severity:
+  - HIGH
+  - CRITICAL
+
+timeout: 10m
+
+scan:
+  security-checks:
+    - vuln
+    - config
+    - secret

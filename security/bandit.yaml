@@ -1,0 +1,23 @@
+# Bandit SAST Configuration for Python Microservices
+###
+# Profiles: select tests to run
+profiles:
+  default:
+    include:
+      - B101  # assert_used
+      - B102  # exec_used
+      - B105  # hardcoded_password_string
+      - B106  # hardcoded_password_funcarg
+      - B108  # hardcoded_tmp_directory
+      - B201  # flask_debug_true
+      - B301  # pickle
+      - B303  # md5
+      - B324  # hashlib_insecure_functions
+      - B608  # hardcoded_sql_expressions
+
+skips:
+  - B101  # Allow assert statements inside tests/ directory
+
+exclude_dirs:
+  - 'backend/tests'
+  - '.venv'

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CloudPulse DevOps Capstone Presentation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --accent: #38bdf8;
+      --accent-green: #34d399;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --border: #334155;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+    body { background-color: var(--bg); color: var(--text); display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; padding: 20px; }
+    .deck-container { width: 100%; max-width: 960px; min-height: 560px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5); padding: 48px; position: relative; display: flex; flex-direction: column; justify-content: space-between; }
+    .slide { display: none; }
+    .slide.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    h1 { font-size: 2.2rem; color: var(--accent); margin-bottom: 12px; }
+    h2 { font-size: 1.5rem; color: var(--accent-green); margin-bottom: 16px; border-bottom: 2px solid var(--border); padding-bottom: 8px; }
+    h3 { font-size: 1.15rem; color: var(--text-muted); margin-bottom: 20px; font-weight: 400; }
+    ul { margin-left: 24px; line-height: 1.8; font-size: 1.1rem; color: #e2e8f0; }
+    li { margin-bottom: 10px; }
+    strong { color: var(--accent); }
+    code { background: #0f172a; padding: 2px 6px; border-radius: 4px; color: var(--accent-green); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .footer { display: flex; justify-content: space-between; align-items: center; margin-top: 32px; padding-top: 16px; border-top: 1px solid var(--border); }
+    .btn { background: #0284c7; color: white; border: none; padding: 10px 20px; border-radius: 6px; cursor: pointer; font-size: 0.95rem; font-weight: 600; transition: background 0.2s; }
+    .btn:hover { background: #0369a1; }
+    .btn:disabled { background: var(--border); cursor: not-allowed; opacity: 0.5; }
+    .slide-num { font-size: 0.9rem; color: var(--text-muted); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<div class="deck-container">
+  <!-- Slide 1 -->
+  <div class="slide active">
+    <h1>CloudPulse Platform</h1>
+    <h2>End-to-End DevOps & DevSecOps Capstone Project</h2>
+    <h3>Session 21: Production Delivery Pipeline & Infrastructure Automation</h3>
+    <ul>
+      <li><strong>Domain:</strong> Multi-Cloud Infrastructure & Asset Inventory Management</li>
+      <li><strong>Stack:</strong> React 18, FastAPI, PostgreSQL, Docker, AWS EKS, Terraform, Helm</li>
+      <li><strong>Pipeline:</strong> GitHub Actions, Pytest, DevSecOps (Trivy, Gitleaks, Bandit)</li>
+      <li><strong>Observability & GitOps:</strong> Prometheus, Grafana, ArgoCD</li>
+      <li><strong>Repository:</strong> <a href="https://github.com/soleilbrulant/cloudpulse-devops-capstone" target="_blank" style="color:var(--accent);">github.com/soleilbrulant/cloudpulse-devops-capstone</a></li>
+    </ul>
+  </div>
+
+  <!-- Slide 2 -->
+  <div class="slide">
+    <h2>Problem Statement & Project Objectives</h2>
+    <ul>
+      <li><strong>Challenge:</strong> Cloud sprawl, visibility gaps across AWS/GCP/Azure, untracked orphan assets, and configuration drift.</li>
+      <li><strong>Solution:</strong> CloudPulse delivers a unified inventory plane for asset tracking, health monitoring, and spend attribution.</li>
+      <li><strong>DevOps Mandate:</strong> Automate the entire delivery lifecycle from commit to AWS production using modern best practices.</li>
+    </ul>
+  </div>
+
+  <!-- Slide 3 -->
+  <div class="slide">
+    <h2>System Architecture Flow</h2>
+    <ul>
+      <li><strong>Code Commit:</strong> Feature branch merged to <code>main</code> on GitHub.</li>
+      <li><strong>CI / DevSecOps:</strong> Pytest (12 tests) &rarr; Vite build &rarr; Bandit SAST &rarr; Gitleaks &rarr; Aqua Trivy scanner.</li>
+      <li><strong>Container Registry:</strong> Hardened images pushed to GitHub Container Registry (GHCR).</li>
+      <li><strong>Cloud Infrastructure:</strong> AWS VPC, Subnets, Internet Gateway, and Amazon EKS managed by Terraform.</li>
+      <li><strong>Kubernetes Orchestration:</strong> Deployments, Services, ConfigMaps, Secrets, Ingress, and HPA packaged in Helm.</li>
+      <li><strong>GitOps:</strong> ArgoCD automatically reconciles cluster state with the Git repository.</li>
+      <li><strong>Monitoring:</strong> Prometheus scrapes <code>/metrics</code> via ServiceMonitor; Grafana provides real-time dashboards.</li>
+    </ul>
+  </div>
+
+  <!-- Slide 4 -->
+  <div class="slide">
+    <h2>Application & Database Architecture</h2>
+    <ul>
+      <li><strong>FastAPI Microservice:</strong> High-throughput Python 3.12 async backend with Pydantic v2 schemas and SQLAlchemy 2.0 ORM.</li>
+      <li><strong>PostgreSQL 16:</strong> Deployed as a Kubernetes StatefulSet with 5Gi PersistentVolumeClaim.</li>
+      <li><strong>Alembic Migrations:</strong> Schema migrations execute automatically before application startup.</li>
+      <li><strong>React 18 Dashboard:</strong> Modular SPA with real-time spend aggregation and cloud provider filtering.</li>
+    </ul>
+  </div>
+
+  <!-- Slide 5 -->
+  <div class="slide">
+    <h2>Containerization & Docker Security</h2>
+    <ul>
+      <li><strong>Multi-Stage Builds:</strong> Strips build tools, compilers, and dev dependencies, minimizing attack surfaces.</li>
+      <li><strong>Non-Root Execution:</strong> Backend runs as UID <code>10001</code> (<code>appuser</code>); Frontend runs as UID <code>101</code> (<code>nginx</code>).</li>
+      <li><strong>Image Footprint:</strong> Minimal alpine/slim images (<180MB).</li>
+      <li><strong>Local Development:</strong> One-command startup via <code>docker compose up -d</code>.</li>
+    </ul>
+  </div>
+
+  <!-- Slide 6 -->
+  <div class="slide">
+    <h2>Infrastructure as Code (Terraform)</h2>
+    <ul>
+      <li><strong>AWS VPC:</strong> Dedicated <code>10.0.0.0/16</code> network with multi-AZ public subnets (ap-south-1a & ap-south-1b).</li>
+      <li><strong>Amazon EKS:</strong> Managed control plane with IAM Role integration.</li>
+      <li><strong>Managed Node Group:</strong> 2x <code>t3.medium</code> instances with autoscaling up to 4 nodes.</li>
+      <li><strong>Idempotency:</strong> Declarative state management with complete clean teardown support.</li>
+    </ul>
+  </div>
+
+  <!-- Slide 7 -->
+  <div class="slide">
+    <h2>Kubernetes & Helm Deployment</h2>
+    <ul>
+      <li><strong>Workload Components:</strong> Deployments, ClusterIP Services, ConfigMaps, Secrets, Ingress, and StatefulSet.</li>
+      <li><strong>Resilience & Health:</strong> Liveness (<code>/health</code>) and Readiness (<code>/ready</code>) probes.</li>
+      <li><strong>Autoscaling:</strong> Horizontal Pod Autoscaler (HPA) targeting 70% CPU (2 to 6 replicas).</li>
+      <li><strong>Helm Packaging:</strong> Parameterized values for dev and prod environments with full lint validation.</li>
+    </ul>
+  </div>
+
+  <!-- Slide 8 -->
+  <div class="slide">
+    <h2>CI/CD & DevSecOps Pipeline</h2>
+    <ul>
+      <li><strong>Testing Gate:</strong> Automated Pytest suite executes 12 unit/integration tests with SQLite in-memory DB.</li>
+      <li><strong>SAST:</strong> Bandit scans Python codebase for security vulnerabilities.</li>
+      <li><strong>Secret Scanning:</strong> Gitleaks detects committed credentials or tokens.</li>
+      <li><strong>Vulnerability Scanner:</strong> Aqua Trivy scans container images; fails build on CRITICAL/HIGH vulnerabilities.</li>
+      <li><strong>Automated Release:</strong> GHCR publishing with Git SHA tagging.</li>
+    </ul>
+  </div>
+
+  <!-- Slide 9 -->
+  <div class="slide">
+    <h2>Monitoring & GitOps</h2>
+    <ul>
+      <li><strong>Prometheus Operator:</strong> Automated scraping via <code>ServiceMonitor</code> every 15 seconds.</li>
+      <li><strong>Grafana Golden Signals:</strong> Real-time panels for Request Rate, Latency (P50/P95/P99), Error Rate (5xx), and Pod Replicas.</li>
+      <li><strong>ArgoCD Continuous Reconciliation:</strong> Git repository as the single source of truth; automatic drift correction and rollbacks.</li>
+    </ul>
+  </div>
+
+  <!-- Slide 10 -->
+  <div class="slide">
+    <h2>Troubleshooting & Production RCA</h2>
+    <ul>
+      <li><strong>Incident 1: ImagePullBackOff:</strong>
+        <br><em>Root Cause:</em> Non-existent image tag specified in deployment.
+        <br><em>Remediation:</em> Corrected image tag to verified release and validated pod readiness.
+      </li>
+      <li style="margin-top:16px;"><strong>Incident 2: 502 Bad Gateway / Endpoints &lt;none&gt;:</strong>
+        <br><em>Root Cause:</em> Service selector mismatch with Pod template labels, and incorrect targetPort (8080 vs 8000).
+        <br><em>Remediation:</em> Aligned selector labels and targetPort; verified healthy endpoint population.
+      </li>
+    </ul>
+  </div>
+
+  <div class="footer">
+    <button class="btn" id="prevBtn" onclick="prevSlide()" disabled>&larr; Previous</button>
+    <span class="slide-num" id="slideNum">Slide 1 of 10</span>
+    <button class="btn" id="nextBtn" onclick="nextSlide()">Next &rarr;</button>
+  </div>
+</div>
+
+<script>
+  let currentSlide = 0;
+  const slides = document.querySelectorAll('.slide');
+  const slideNum = document.getElementById('slideNum');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  function showSlide(index) {
+    slides[currentSlide].classList.remove('active');
+    currentSlide = index;
+    slides[currentSlide].classList.add('active');
+    slideNum.textContent = `Slide ${currentSlide + 1} of ${slides.length}`;
+    prevBtn.disabled = currentSlide === 0;
+    nextBtn.disabled = currentSlide === slides.length - 1;
+  }
+
+  function nextSlide() {
+    if (currentSlide < slides.length - 1) showSlide(currentSlide + 1);
+  }
+
+  function prevSlide() {
+    if (currentSlide > 0) showSlide(currentSlide - 1);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === ' ') nextSlide();
+    if (e.key === 'ArrowLeft') prevSlide();
+  });
+</script>
+</body>
+</html>
