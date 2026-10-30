@@ -11,7 +11,7 @@
 ---
 
 > ### 📢 Official Capstone Submission Artifacts
-> - 🎬 **Demo Video Walkthrough:** [**Watch on Google Drive (`demo/VIDEO.md`)**](./demo/VIDEO.md)
+> - 🎬 **Demo Video Walkthrough:** [👉 **Watch on Google Drive**](https://drive.google.com/file/d/1MjWNdOOhW2WfD3lgkewCFqb2unRxYm1R/view?usp=sharing) | [**Local Video File (`demo/cloudpulse_capstone_demo.mp4`)**](./demo/cloudpulse_capstone_demo.mp4)
 > - 📊 **Project Presentation Deck:** [**View Slides (`demo/PRESENTATION.md`)**](./demo/PRESENTATION.md) | [**Interactive Deck (`demo/presentation.html`)**](./demo/presentation.html)
 > - 📋 **Submission Specification & Checklist:** [**`SUBMISSION.md`**](./SUBMISSION.md)
 > - 📸 **Dashboard Screenshots & Proof:** [**`demo/screenshots/`**](./demo/screenshots/)

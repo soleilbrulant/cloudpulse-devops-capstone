@@ -9,7 +9,7 @@
 | Source | File / URL Link | Specifications |
 |---|---|---|
 | **Repository File (Primary)** | [🎥 **`demo/cloudpulse_capstone_demo.mp4`**](./cloudpulse_capstone_demo.mp4) | **Full HD 1080p (1920x1080)**, H.264 Video + AAC Voice Narration (5.1 MB) |
-| **Google Drive (Mirror)** | [👉 Watch on Google Drive](https://drive.google.com/file/d/YOUR_GOOGLE_DRIVE_VIDEO_LINK_HERE/view?usp=sharing) | Cloud Streaming (Set sharing to *"Anyone with the link can view"*) |
+| **Google Drive (Mirror)** | [👉 **Watch on Google Drive**](https://drive.google.com/file/d/1MjWNdOOhW2WfD3lgkewCFqb2unRxYm1R/view?usp=sharing) | Full HD Cloud Stream (`shashwatverma2911@gmail.com`) |
 
 ---
 

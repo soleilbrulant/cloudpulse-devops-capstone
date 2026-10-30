@@ -198,7 +198,8 @@ Observability & Telemetry
 ---
 
 ## Slide 15: Q&A & Demonstration Links
-- **Demo Video:** [Google Drive Demo Link](https://drive.google.com/file/d/YOUR_GOOGLE_DRIVE_VIDEO_LINK_HERE/view?usp=sharing)
+- **Demo Video (Google Drive):** [👉 **Watch on Google Drive**](https://drive.google.com/file/d/1MjWNdOOhW2WfD3lgkewCFqb2unRxYm1R/view?usp=sharing)
+- **Local Video in Repo:** [`cloudpulse_capstone_demo.mp4`](./cloudpulse_capstone_demo.mp4)
 - **Repository:** [github.com/soleilbrulant/cloudpulse-devops-capstone](https://github.com/soleilbrulant/cloudpulse-devops-capstone)
 - **Documentation:** See `README.md` and `SUBMISSION.md`
 - **Thank you!**

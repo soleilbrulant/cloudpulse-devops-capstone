@@ -29,7 +29,8 @@
 
 ## 🔗 Quick Access Links
 
-- **Primary Demo Video (Google Drive):** [Click to watch Video Walkthrough](https://drive.google.com/file/d/YOUR_GOOGLE_DRIVE_VIDEO_LINK_HERE/view?usp=sharing)
+- **Primary Demo Video (Google Drive):** [👉 **Click to watch Video Walkthrough on Google Drive**](https://drive.google.com/file/d/1MjWNdOOhW2WfD3lgkewCFqb2unRxYm1R/view?usp=sharing)
+- **Local Video in Repo:** [`demo/cloudpulse_capstone_demo.mp4`](./demo/cloudpulse_capstone_demo.mp4)
 - **Demo Folder:** [`demo/`](./demo/)
 - **Troubleshooting Playbook:** [`troubleshooting/TROUBLESHOOTING.md`](./troubleshooting/TROUBLESHOOTING.md)
 
